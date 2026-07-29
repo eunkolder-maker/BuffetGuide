@@ -31,6 +31,7 @@
   --accent: #6f4c36;
   --shadow: 0 12px 32px rgba(40, 29, 22, 0.10);
   --radius-large: 22px;
+  --search-side: 14px;
 }
 
 * {
@@ -45,6 +46,7 @@ html {
 body {
   min-width: 320px;
   margin: 0;
+  overflow-x: hidden;
   background: var(--page-bg);
   color: var(--text);
   font-family: "HGGothic", sans-serif;
@@ -59,7 +61,7 @@ select {
 }
 
 /* =========================
-   2. 상단 제목 영역
+   2. 상단 제목
 ========================= */
 .hero-header {
   padding:
@@ -107,31 +109,22 @@ select {
   word-break: keep-all;
 }
 
-/* =========================================
-   3. 검색창 고정 영역
+/* =========================
+   3. 검색창
 
-   처음: 제목 바로 아래의 일반 검색창
-   스크롤 후: 화면 상단에 자연스럽게 고정
-========================================= */
-#search-sticky-sentinel {
+   평상시에는 문서 안에 있고,
+   고정되면 검색창만 화면 위에 떠 있습니다.
+========================= */
+.search-slot {
+  position: relative;
   width: 100%;
-  height: 1px;
-  margin-bottom: -1px;
+  min-height: 68px;
 }
 
 .search-sticky-area {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding:
-    12px
-    14px
-    10px;
-  background: var(--page-bg);
-  transition:
-    padding 180ms ease,
-    background-color 180ms ease,
-    box-shadow 180ms ease;
+  width: 100%;
+  padding: 12px var(--search-side) 10px;
+  background: transparent;
 }
 
 .search-inner {
@@ -144,17 +137,14 @@ select {
   width: 100%;
 }
 
-/*
-   padding: 위 오른쪽 아래 왼쪽
-   마지막 숫자를 늘리면 아이콘과 글자 사이가 넓어집니다.
-*/
 .search-box input {
   width: 100%;
   height: 46px;
-  padding: 0 16px 0 50px;
+  padding: 0 42px 0 50px;
   border: 1px solid rgba(35, 25, 20, 0.10);
   border-radius: 14px;
   outline: none;
+  -webkit-appearance: none;
   appearance: none;
   background: #ffffff;
   color: #222222;
@@ -166,6 +156,11 @@ select {
     height 180ms ease,
     border-radius 180ms ease,
     box-shadow 180ms ease;
+}
+
+.search-box input::-webkit-search-decoration,
+.search-box input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
 }
 
 .search-box input::placeholder {
@@ -182,8 +177,8 @@ select {
 
 .search-icon {
   position: absolute;
-  left: 18px;
   top: 50%;
+  left: 18px;
   z-index: 1;
   width: 23px;
   height: 23px;
@@ -195,24 +190,38 @@ select {
     height 180ms ease;
 }
 
-/* JavaScript가 스크롤 상태를 감지하면 이 클래스가 붙습니다. */
-.search-sticky-area.is-stuck {
+/*
+  Safari 대응:
+  position: sticky 대신 JavaScript가 이 클래스를 붙여
+  검색창 영역을 직접 fixed로 전환합니다.
+*/
+.search-sticky-area.is-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
   padding:
     calc(7px + env(safe-area-inset-top))
     12px
     8px;
-  background: rgba(255, 255, 255, 0.88);
-  border-bottom: 1px solid rgba(35, 27, 22, 0.07);
-  box-shadow: 0 5px 18px rgba(40, 29, 22, 0.08);
+  background: transparent;
+  pointer-events: none;
 }
 
-.search-sticky-area.is-stuck .search-box input {
+.search-sticky-area.is-fixed .search-inner {
+  pointer-events: auto;
+}
+
+.search-sticky-area.is-fixed .search-box input {
   height: 40px;
   border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(40, 29, 22, 0.09);
+  box-shadow:
+    0 3px 12px rgba(40, 29, 22, 0.16),
+    0 0 0 1px rgba(35, 27, 22, 0.03);
 }
 
-.search-sticky-area.is-stuck .search-icon {
+.search-sticky-area.is-fixed .search-icon {
   width: 20px;
   height: 20px;
 }
@@ -264,6 +273,11 @@ select {
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.secondary-button:active {
+  transform: translateY(1px);
 }
 
 .map-card {
@@ -317,7 +331,7 @@ select {
 }
 
 /* =========================
-   6. 상세 정보 영역
+   6. 상세 정보
 ========================= */
 .detail-card {
   margin-top: 22px;
@@ -377,13 +391,12 @@ select {
    8. 큰 화면
 ========================= */
 @media (min-width: 768px) {
-  .hero-header {
-    padding-bottom: 34px;
+  :root {
+    --search-side: 18px;
   }
 
-  .search-sticky-area {
-    padding-right: 18px;
-    padding-left: 18px;
+  .hero-header {
+    padding-bottom: 34px;
   }
 
   .page-container {
@@ -396,7 +409,6 @@ select {
   }
 }
 
-/* 움직임 줄이기를 사용하는 기기에서는 애니메이션을 끕니다. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
