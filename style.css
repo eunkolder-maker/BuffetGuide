@@ -1,7 +1,26 @@
 /* =========================
    1. 기본 설정
 ========================= */
+@font-face {
+    font-family: "HGGothic";
+    src: url("./fonts/HGGGothicssi_Pro 40g.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: "HGGothic";
+    src: url("./fonts/HGGGothicssi_Pro 60g.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HGGothic";
+    src: url("./fonts/HGGGothicssi_Pro 80g.otf") format("opentype");
+    font-weight: 800;
+    font-style: normal;
+}
 :root {
   --page-bg: #f4f1ed;
   --surface: #ffffff;
@@ -25,16 +44,7 @@ html {
 }
 
 body {
-  margin: 0;
-  background: var(--page-bg);
-  color: var(--text);
-  font-family:
-    Pretendard,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Apple SD Gothic Neo",
-    "Noto Sans KR",
-    sans-serif;
+    font-family: "HGGothic", sans-serif;
 }
 
 
