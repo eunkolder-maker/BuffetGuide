@@ -1,305 +1,85 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>마키노 조식 뷔페 가이드</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Pretendard, Arial, sans-serif;
-}
-
-body{
-    background:#f5f5f5;
-    color:#333;
-}
-
-.hero-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding:
-        calc(22px + env(safe-area-inset-top))
-        18px
-        34px;
-    color: #ffffff;
-    background:
-        radial-gradient(
-            circle at 50% -20%,
-            rgba(117, 85, 63, 0.35),
-            transparent 52%
-        ),
-        linear-gradient(
-            145deg,
-            #1c1613 0%,
-            #0f0d0c 55%,
-            #17110e 100%
-        );
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
-}
-
-.hero-inner {
-    width: 100%;
-    max-width: 720px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.hero-header h1 {
-    margin: 0;
-    font-size: clamp(30px, 8vw, 46px);
-    font-weight: 800;
-    line-height: 1.18;
-    letter-spacing: -0.04em;
-    word-break: keep-all;
-}
-
-.hero-header p {
-    margin: 18px 0 0;
-    color: rgba(255, 255, 255, 0.76);
-    font-size: clamp(15px, 4vw, 20px);
-    font-weight: 500;
-    line-height: 1.55;
-    letter-spacing: -0.025em;
-    word-break: keep-all;
-}
-
-.search-box {
-    position: relative;
-    margin-top: 30px;
-}
-
-.search-box input {
-    width: 100%;
-    height: 48px;
-    padding: 0 16px 0 46px;
-    border: 1px solid rgba(20, 20, 20, 0.12);
-    border-radius: 14px;
-    outline: none;
-    appearance: none;
-    background: #ffffff;
-    color: #222222;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-    box-shadow:
-        0 9px 24px rgba(0, 0, 0, 0.19),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-.search-box input::placeholder {
-    color: #8c919b;
-    opacity: 1;
-}
-
-.search-box input:focus {
-    border-color: #2f8f46;
-    box-shadow:
-        0 0 0 4px rgba(47, 143, 70, 0.18),
-        0 10px 26px rgba(0, 0, 0, 0.2);
-}
-
-.search-icon {
-    position: absolute;
-    top: 50%;
-    left: 16px;
-width: 16px;
-height: 16px;
-border: 3px solid #68707b;
-    border-radius: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-.search-icon::after {
-    content: "";
-    position: absolute;
-    right: -8px;
-bottom: -5px;
-width: 10px;
-height: 3px;
-    border-radius: 999px;
-    background: #68707b;
-    transform: rotate(45deg);
-    transform-origin: left center;
-}
-
-@media (max-width: 480px) {
-    .hero-header {
-        padding:
-            calc(20px + env(safe-area-inset-top))
-            14px
-            28px;
-    }
-
-    .hero-header h1 {
-        font-size: 34px;
-    }
-
-    .hero-header p {
-        margin-top: 14px;
-        font-size: 16px;
-    }
-
-    .search-box {
-        margin-top: 25px;
-    }
-
-    .search-box input {
-        height: 68px;
-        padding-left: 65px;
-        border-radius: 14px;
-        font-size: 21px;
-    }
-
-    .search-icon {
-        left: 24px;
-        width: 22px;
-        height: 22px;
-        border-width: 3px;
-    }
-}
-
-.container{
-
-    max-width:700px;
-    margin:auto;
-    padding:20px;
-
-}
-
-.card{
-
-    background:white;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
-}
-
-.card img{
-
-    width:100%;
-    display:block;
-
-}
-
-.notice{
-
-    padding:18px;
-    text-align:center;
-    color:#666;
-    font-size:16px;
-
-}
-
-.info{
-
-    margin-top:20px;
-    background:white;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
-}
-
-.info h2{
-
-    margin-bottom:15px;
-
-}
-
-.info p{
-
-    line-height:1.8;
-
-}
-
-footer{
-
-    padding:40px;
-    text-align:center;
-    color:#888;
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#161210">
+  <title>마키노 조식뷔페</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-<header class="hero-header">
-
+  <header class="hero-header">
     <div class="hero-inner">
+      <h1>마키노 조식뷔페 세팅</h1>
+      <p>배치도에서 코너를 선택하면 세팅 정보와 사진을 확인할 수 있습니다.</p>
 
-        <h1>마키노 조식뷔페 세팅</h1>
-
-        <p>
-            배치도에서 코너를 선택하면 세팅 정보와 사진을 확인할 수 있습니다.
-        </p>
-
-        <div class="search-box">
-
-            <span class="search-icon"></span>
-
-            <input
-                type="search"
-                placeholder="음식 검색"
-            >
-
-        </div>
-
+      <label class="search-box" for="food-search">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input
+          id="food-search"
+          type="search"
+          placeholder="음식 검색"
+          autocomplete="off"
+          aria-label="음식 검색"
+        >
+      </label>
     </div>
+  </header>
 
-</header>
+  <main class="page-container">
+    <section class="map-section" aria-labelledby="map-title">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">BUFFET MAP</span>
+          <h2 id="map-title">전체 배치도</h2>
+        </div>
+        <button id="reset-button" class="secondary-button" type="button">
+          전체 보기
+        </button>
+      </div>
 
-<div class="container">
+      <div class="map-card">
+        <div class="map-stage" id="map-stage">
+          <img
+            id="buffet-map"
+            src="map.png"
+            alt="마키노 조식뷔페 전체 배치도"
+          >
 
-<div class="card">
+          <!--
+            다음 단계에서 이곳에 투명 클릭 버튼을 추가합니다.
 
-<img src="map.png" alt="뷔페 배치도">
+            예시:
+            <button
+              class="hotspot"
+              data-corner="bread"
+              style="left:20%; top:15%; width:24%; height:10%;"
+              aria-label="빵 코너"
+            ></button>
+          -->
+        </div>
+      </div>
 
-</div>
+      <p class="map-guide">배치도를 위아래로 스크롤해 전체 구성을 확인하세요.</p>
+    </section>
 
-<div class="notice">
+    <section class="detail-card" id="detail-card" aria-live="polite">
+      <div class="empty-state">
+        <span class="empty-icon">⌁</span>
+        <h2>선택한 코너</h2>
+        <p>
+          이후 배치도의 음식 코너를 터치하면 사진, 기물,
+          세팅 방법과 주의사항이 여기에 표시됩니다.
+        </p>
+      </div>
+    </section>
+  </main>
 
-👇 배치도의 코너를 터치하세요.
+  <footer class="site-footer">
+    Makino Breakfast Buffet Setting Guide
+  </footer>
 
-</div>
-
-<div class="info">
-
-<h2>선택한 코너</h2>
-
-<p>
-
-아직 선택된 코너가 없습니다.
-
-<br><br>
-
-배치도의 음식 코너를 터치하면
-
-사진, 기물, 세팅방법이 이곳에 표시됩니다.
-
-</p>
-
-</div>
-
-</div>
-
-<footer>
-
-Makino Buffet Guide v1.0
-
-</footer>
-
+  <script src="script.js"></script>
 </body>
-
 </html>
