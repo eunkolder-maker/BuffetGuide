@@ -137,9 +137,9 @@ body {
   position: absolute;
   top: 50%;
   left: 17px;
-  width: 15px;
-  height: 15px;
-  border: 2.5px solid #6d737c;
+  width: 22px;
+  height: 22px;
+  border: 1.8px solid #6d737c;
   border-radius: 50%;
   transform: translateY(-57%);
   pointer-events: none;
@@ -148,10 +148,10 @@ body {
 .search-icon::after {
   content: "";
   position: absolute;
-  right: -7px;
-  bottom: -5px;
-  width: 9px;
-  height: 2.5px;
+  right: -5px;
+  bottom: -4px;
+  width: 7px;
+  height: 1.8px;
   border-radius: 99px;
   background: #6d737c;
   transform: rotate(45deg);
