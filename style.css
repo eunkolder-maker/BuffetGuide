@@ -104,11 +104,21 @@ body {
   display: block;
   margin-top: 22px;
 }
+/* =========================================
 
+   검색창 설정
+
+   padding: 위 오른쪽 아래 왼쪽
+
+   마지막 숫자(왼쪽 padding)를 늘리면
+
+   🔍 아이콘과 "음식 검색" 글자의 간격이 넓어진다.
+
+========================================= */
 .search-box input {
   width: 100%;
   height: 48px;
-  padding: 0 16px 0 45px;
+  padding: 0 16px 0 50px;
   border: 1px solid rgba(35, 25, 20, 0.10);
   border-radius: 13px;
   outline: none;
