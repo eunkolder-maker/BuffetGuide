@@ -99,10 +99,19 @@ body {
   word-break: keep-all;
 }
 
+/* =========================================
+   검색창 영역
+   - 스크롤하면 화면 상단에 고정됨
+========================================= */
+
 .search-box {
-  position: relative;
-  display: block;
-  margin-top: 22px;
+
+    position: relative;
+
+    display: block;
+
+    margin-top: 22px;
+
 }
 /* =========================================
 
