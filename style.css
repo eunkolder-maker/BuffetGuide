@@ -341,3 +341,9 @@ body {
     border-radius: 26px;
   }
 }
+input,
+button,
+textarea,
+select {
+    font-family: "HGGothic", sans-serif;
+}
