@@ -2,25 +2,26 @@
    1. 기본 설정
 ========================= */
 @font-face {
-    font-family: "HGGothic";
-    src: url("./fonts/HGGGothicssi_Pro-40g.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
+  font-family: "HGGothic";
+  src: url("./fonts/HGGGothicssi_Pro-40g.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "HGGothic";
-    src: url("./fonts/HGGGothicssi_Pro-60g.otf") format("opentype");
-    font-weight: 600;
-    font-style: normal;
+  font-family: "HGGothic";
+  src: url("./fonts/HGGGothicssi_Pro-60g.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "HGGothic";
-    src: url("./fonts/HGGGothicssi_Pro-80g.otf") format("opentype");
-    font-weight: 800;
-    font-style: normal;
+  font-family: "HGGothic";
+  src: url("./fonts/HGGGothicssi_Pro-80g.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
 }
+
 :root {
   --page-bg: #f4f1ed;
   --surface: #ffffff;
@@ -28,10 +29,8 @@
   --muted: #77716c;
   --line: rgba(35, 27, 22, 0.10);
   --accent: #6f4c36;
-  --header-dark: #14110f;
   --shadow: 0 12px 32px rgba(40, 29, 22, 0.10);
   --radius-large: 22px;
-  --radius-medium: 15px;
 }
 
 * {
@@ -44,20 +43,29 @@ html {
 }
 
 body {
-    font-family: "HGGothic", sans-serif;
-    font-weight: 400;
+  min-width: 320px;
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--text);
+  font-family: "HGGothic", sans-serif;
+  font-weight: 400;
 }
 
+input,
+button,
+textarea,
+select {
+  font-family: "HGGothic", sans-serif;
+}
 
 /* =========================
-   2. 상단 제목과 검색창
+   2. 상단 제목 영역
 ========================= */
-
 .hero-header {
   padding:
     calc(25px + env(safe-area-inset-top))
     18px
-    28px;
+    27px;
   color: #ffffff;
   background:
     radial-gradient(
@@ -100,36 +108,52 @@ body {
 }
 
 /* =========================================
-   검색창 영역
-   - 스크롤하면 화면 상단에 고정됨
+   3. 검색창 고정 영역
+
+   처음: 제목 바로 아래의 일반 검색창
+   스크롤 후: 화면 상단에 자연스럽게 고정
 ========================================= */
+#search-sticky-sentinel {
+  width: 100%;
+  height: 1px;
+  margin-bottom: -1px;
+}
+
+.search-sticky-area {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding:
+    12px
+    14px
+    10px;
+  background: var(--page-bg);
+  transition:
+    padding 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.search-inner {
+  width: min(100%, 732px);
+  margin: 0 auto;
+}
 
 .search-box {
-
-    position: relative;
-
-    display: block;
-
-    margin-top: 22px;
-
+  position: relative;
+  width: 100%;
 }
-/* =========================================
 
-   검색창 설정
-
+/*
    padding: 위 오른쪽 아래 왼쪽
-
-   마지막 숫자(왼쪽 padding)를 늘리면
-
-   🔍 아이콘과 "음식 검색" 글자의 간격이 넓어진다.
-
-========================================= */
+   마지막 숫자를 늘리면 아이콘과 글자 사이가 넓어집니다.
+*/
 .search-box input {
   width: 100%;
-  height: 48px;
+  height: 46px;
   padding: 0 16px 0 50px;
   border: 1px solid rgba(35, 25, 20, 0.10);
-  border-radius: 13px;
+  border-radius: 14px;
   outline: none;
   appearance: none;
   background: #ffffff;
@@ -137,7 +161,11 @@ body {
   font: inherit;
   font-size: 16px;
   font-weight: 500;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 6px 18px rgba(40, 29, 22, 0.10);
+  transition:
+    height 180ms ease,
+    border-radius 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .search-box input::placeholder {
@@ -148,30 +176,56 @@ body {
 .search-box input:focus {
   border-color: #8f664a;
   box-shadow:
-    0 0 0 4px rgba(143, 102, 74, 0.20),
-    0 8px 22px rgba(0, 0, 0, 0.16);
+    0 0 0 4px rgba(143, 102, 74, 0.18),
+    0 8px 22px rgba(40, 29, 22, 0.14);
 }
 
 .search-icon {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
-    pointer-events: none;
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  z-index: 1;
+  width: 23px;
+  height: 23px;
+  transform: translateY(-50%);
+  object-fit: contain;
+  pointer-events: none;
+  transition:
+    width 180ms ease,
+    height 180ms ease;
 }
 
+/* JavaScript가 스크롤 상태를 감지하면 이 클래스가 붙습니다. */
+.search-sticky-area.is-stuck {
+  padding:
+    calc(7px + env(safe-area-inset-top))
+    12px
+    8px;
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(35, 27, 22, 0.07);
+  box-shadow: 0 5px 18px rgba(40, 29, 22, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.search-sticky-area.is-stuck .search-box input {
+  height: 40px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(40, 29, 22, 0.09);
+}
+
+.search-sticky-area.is-stuck .search-icon {
+  width: 20px;
+  height: 20px;
+}
 
 /* =========================
-   3. 본문과 배치도
+   4. 본문과 배치도
 ========================= */
-
 .page-container {
   width: min(100%, 760px);
   margin: 0 auto;
-  padding: 24px 14px 38px;
+  padding: 14px 14px 38px;
 }
 
 .map-section {
@@ -243,11 +297,9 @@ body {
   line-height: 1.55;
 }
 
-
 /* =========================
-   4. 클릭 영역 준비
+   5. 클릭 영역 준비
 ========================= */
-
 .hotspot {
   position: absolute;
   z-index: 2;
@@ -266,11 +318,9 @@ body {
   outline: none;
 }
 
-
 /* =========================
-   5. 상세 정보 영역
+   6. 상세 정보 영역
 ========================= */
-
 .detail-card {
   margin-top: 22px;
   padding: 26px 20px;
@@ -312,11 +362,9 @@ body {
   word-break: keep-all;
 }
 
-
 /* =========================
-   6. 하단
+   7. 하단
 ========================= */
-
 .site-footer {
   padding:
     10px
@@ -327,18 +375,21 @@ body {
   text-align: center;
 }
 
-
 /* =========================
-   7. 큰 화면
+   8. 큰 화면
 ========================= */
-
 @media (min-width: 768px) {
   .hero-header {
     padding-bottom: 34px;
   }
 
+  .search-sticky-area {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
   .page-container {
-    padding-top: 34px;
+    padding-top: 22px;
   }
 
   .map-card,
@@ -346,9 +397,13 @@ body {
     border-radius: 26px;
   }
 }
-input,
-button,
-textarea,
-select {
-    font-family: "HGGothic", sans-serif;
+
+/* 움직임 줄이기를 사용하는 기기에서는 애니메이션을 끕니다. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
 }
